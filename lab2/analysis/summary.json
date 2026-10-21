@@ -1,0 +1,117 @@
+{
+  "t_star": 0.031193889677524567,
+  "validation": [
+    {
+      "rule": "Стандартний поріг",
+      "threshold": 0.5,
+      "TP": 71,
+      "FP": 9,
+      "FN": 27,
+      "TN": 56854,
+      "C": 279
+    },
+    {
+      "rule": "Мінімум вартості",
+      "threshold": 0.031193889677524567,
+      "TP": 82,
+      "FP": 34,
+      "FN": 16,
+      "TN": 56829,
+      "C": 194
+    },
+    {
+      "rule": "Усі негативні",
+      "threshold": "inf",
+      "TP": 0,
+      "FP": 0,
+      "FN": 98,
+      "TN": 56863,
+      "C": 980
+    }
+  ],
+  "metrics_validation": {
+    "roc_auc": 0.97331771637308,
+    "average_precision": 0.7847274206415048
+  },
+  "checks": {
+    "A": {
+      "tables_identical": true,
+      "t_star_fast": 0.4,
+      "t_star_bruteforce": 0.4,
+      "C_star": 2,
+      "passed": true
+    },
+    "B": {
+      "tables_identical": true,
+      "t_star_fast": "inf",
+      "t_star_bruteforce": "inf",
+      "C_star": 0,
+      "passed": true
+    },
+    "C": {
+      "tables_identical": true,
+      "t_star_fast": 0.8,
+      "t_star_bruteforce": 0.8,
+      "C_star": 10,
+      "passed": true
+    }
+  },
+  "test": [
+    {
+      "rule": "Стандартний поріг",
+      "threshold": 0.5,
+      "TP": 71,
+      "FP": 8,
+      "FN": 28,
+      "TN": 56855,
+      "C": 288,
+      "precision": 0.8987341772151899,
+      "recall": 0.7171717171717171
+    },
+    {
+      "rule": "Мінімум вартості",
+      "threshold": 0.031193889677524567,
+      "TP": 80,
+      "FP": 43,
+      "FN": 19,
+      "TN": 56820,
+      "C": 233,
+      "precision": 0.6504065040650406,
+      "recall": 0.8080808080808081
+    },
+    {
+      "rule": "Усі негативні",
+      "threshold": "inf",
+      "TP": 0,
+      "FP": 0,
+      "FN": 99,
+      "TN": 56863,
+      "C": 990,
+      "precision": null,
+      "recall": 0.0
+    }
+  ],
+  "error_stats": {
+    "FP_all": {
+      "n": 43,
+      "amount_median": 2.49,
+      "amount_mean": 110.97930232558139,
+      "amount_min": 0.0,
+      "amount_max": 1000.0,
+      "score_dist_median": 0.02499006688594818,
+      "score_dist_min": 0.00019192323088645935,
+      "score_dist_max": 0.9351331815123558
+    },
+    "FN_all": {
+      "n": 19,
+      "amount_median": 33.76,
+      "amount_mean": 161.98526315789474,
+      "amount_min": 0.0,
+      "amount_max": 829.41,
+      "score_dist_median": -0.02911831089295447,
+      "score_dist_min": -0.031144775337452302,
+      "score_dist_max": -0.00970308668911457
+    },
+    "Amount_median_all_test": 22.0
+  }
+}
