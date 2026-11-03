@@ -1,5 +1,0 @@
-{
-  "t_star": 0.031193889677524567,
-  "validation_C": 194,
-  "rule": "predict fraud if score >= t_star; min C=10*FN+FP; ties -> largest threshold"
-}
