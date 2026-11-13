@@ -1,0 +1,161 @@
+{
+  "regime": "unfreeze",
+  "seed": 3,
+  "config": {
+    "split": {
+      "procedure": "default_rng(0) по класах для train (200/клас); новий default_rng(0) для seg_test, cut=n//2",
+      "train": 1200,
+      "validation": 1498
+    },
+    "transforms": {
+      "train": "RandomResizedCrop(160, scale=(0.7, 1.0)) -> RandomHorizontalFlip() -> ToTensor() -> Normalize",
+      "eval": "Resize((160, 160)) -> ToTensor() -> Normalize",
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ],
+      "image_open": "Pillow .convert(\"RGB\")"
+    },
+    "model": {
+      "arch": "resnet18",
+      "weights": "IMAGENET1K_V1",
+      "fc": "Linear(512, 6), стандартна ініціалізація",
+      "trainable_modules": [
+        "layer4",
+        "fc"
+      ],
+      "eval_modules_during_training": [
+        "conv1",
+        "bn1",
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "trainable_params": 8396806,
+      "total_params": 11179590,
+      "bn": {
+        "momentum": 0.1,
+        "eps": 1e-05,
+        "note": "за замовчуванням"
+      },
+      "dtype": "float32"
+    },
+    "optimizer": {
+      "name": "AdamW",
+      "weight_decay": 0.0001,
+      "groups": [
+        {
+          "name": "fc",
+          "params": 3078,
+          "lr": 0.003
+        },
+        {
+          "name": "layer4",
+          "params": 8393728,
+          "lr": 0.0003
+        }
+      ],
+      "defaults": {
+        "lr": 0.001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.0001,
+        "amsgrad": false,
+        "foreach": null,
+        "maximize": false,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null
+      }
+    },
+    "loss": "CrossEntropyLoss() (mean)",
+    "loaders": {
+      "train": {
+        "batch_size": 32,
+        "shuffle": true,
+        "drop_last": false,
+        "num_workers": 0,
+        "generator": null,
+        "sampler": null
+      },
+      "eval": {
+        "batch_size": 64,
+        "shuffle": false,
+        "num_workers": 0
+      }
+    },
+    "budget": {
+      "epochs": 8,
+      "steps_per_epoch": 38,
+      "total_steps": 304
+    },
+    "not_used": "lr-розклади, обрізання градієнта, AMP, label smoothing, ваги класів, рання зупинка, вибір епохи за validation"
+  },
+  "git": {
+    "commit": "6efbbc80860299eb708941fc1d6c487788122128",
+    "uncommitted_changes": false
+  },
+  "split_sha256": "d3a611aec41f6e335ab58287f10a443f3e0e35aa9adfefae662d48b15af567f9",
+  "versions": {
+    "python": "3.12.15",
+    "torch": "2.5.1+cpu",
+    "torchvision": "0.20.1+cpu",
+    "platform": "Windows-11-10.0.22621-SP0"
+  },
+  "device": "cpu",
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5107962328195572,
+      "val_macro_f1": 0.7934184244798305
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.21285364389419556,
+      "val_macro_f1": 0.872156744287775
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.12111880605419477,
+      "val_macro_f1": 0.8976633899132835
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.11961052713294824,
+      "val_macro_f1": 0.8880637584543775
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.08481888448198636,
+      "val_macro_f1": 0.9073981331828751
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.06252215199793379,
+      "val_macro_f1": 0.8770617133019883
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.11554549923787515,
+      "val_macro_f1": 0.8681777794927896
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.08817653300551077,
+      "val_macro_f1": 0.8600034324980733
+    }
+  ],
+  "final_val_macro_f1": 0.8600034324980733,
+  "train_time_s": 114.34539009991568,
+  "total_time_s": 203.14505890000146,
+  "time_note": "train_time_s - лише цикл навчання (без оцінки на validation); total_time_s - з оцінкою після кожної епохи"
+}
